@@ -10,8 +10,8 @@ body{
 
 .container{
   display: grid;
-  grid-template: "screen screen screen screen screen" 60px
-      "seven eight nine clear clear" 60px
+  grid-template: "display display display display display" 60px
+      "seven eight nine clearOne clearAll" 60px
       "four five six add minus" 60px
       "one two three add multiply" 60px
       "zero period equals equals divide" 60px
@@ -24,8 +24,8 @@ body{
   
 }
 
-#screen{
-  grid-area: screen;
+#display{
+  grid-area: display;
 }
 
 #seven{
@@ -40,8 +40,12 @@ body{
   grid-area: nine;
 }
 
-#clear{
-  grid-area: clear;
+#clearAll{
+  grid-area: clearAll;
+}
+
+#clearOne{
+  grid-area: clearOne;
 }
 
 #four{
@@ -116,13 +120,19 @@ button{
   border-color: rgb(138, 138, 138);
 }
 
-#clear{
+.clear{
   background-color: rgb(192, 3, 3);
   border-color:  rgb(192, 3, 3);
 }
 
-#screen{
+
+#display{
   background-color: rgb(202, 202, 202);
   border-color:  rgb(202, 202, 202);
   margin-bottom: 5px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.7em;
+  padding: 10px 2px;
+  overflow: hidden;
+  
 }
