@@ -3,9 +3,7 @@ Javascript for the functions of the calculator
  
 Created by: Rebecca Jackson as part of Dev Academy Sprint 5 challenges
 
-User Story #8: As I input numbers, I should be able to see my input in the element with the id of display.
-
-User Story #9: In any order, I should be able to add, subtract, multiply and divide a chain of numbers of any length, and when I hit =, the correct result should be shown in the element with the id of display.
+  User Story #9: In any order, I should be able to add, subtract, multiply and divide a chain of numbers of any length, and when I hit =, the correct result should be shown in the element with the id of display.
 
 User Story #10: When inputting numbers, my calculator should not allow a number to begin with multiple zeros.
 
@@ -23,99 +21,120 @@ document.addEventListener('DOMContentLoaded', runCalculator)
 
 //global variables
 //stores the input from the user
-var input = [''];
+var input = "";
 //string that stores current inputs
-var totalString;
+//var totalString;
 // validation checks
 var validationOp = ['+', '-', '/', '*'];
-var validationDot = ['.'];
+var validationDec = ['.'];
 //numbers for validation
-var nums = [0,1,2,3,4,5,6,7,8,9];
+//var nums = [0,1,2,3,4,5,6,7,8,9];
 
 
 function runCalculator(){
-  setListeners()
-}//runcalculator()
-
-
-function setListeners(){
-  //console.log('set listeners')
+  input = "0";
 }
 
 // Event listeners
 $('button').on('click', function(){
-  console.log(this.id)
+  if(input === '0'){
+    input = '';
+  }
  switch(this.id){
   case 'one':
-    input.push('1');
+    input = input + '1';
   break;
   case 'two':
-    input.push('2');
+    input = input + '2';
   break;
   case 'three':
-    input.push('3');
+    input = input + '3';
   break;
   case 'four':
-   input.push('4');
+   input = input + '4';
   break;
   case 'five':
-    input.push('5');
+    input = input + '5';
   break;
   case 'six':
-    input.push('6');
+    input = input + '6';
   break;
   case 'seven':
-    input.push('7');
+    input = input + '7';
   break;
   case 'eight':
-    input.push('8');
+    input = input + '8';
   break;
   case 'nine':
-    input.push('9');
+    input = input + '9';
   break;
   case 'zero':
-    input.push('0');
+    input = input + '0';
   break;
   case 'decimal':
-    input.push('.');
+    //validate decimal
+    input = input + '.';
   break;
   case 'clearOne':
-    input.pop();
+    input = input.slice(0, -1);
   break;
   case 'clearAll':
-    input = [''];
+    input = '0';
   break;
   case 'add':
-    
+  //validate operators
+    if(checkOperator(input) === true){
+      return
+    }else{
+      input = input + '+';
+    };
   break;
   case 'minus':
-    
+    if(checkOperator(this.id) === true){
+      return
+    }else{
+      input = input + '-';
+    };
   break;
   case 'divide':
-    
+    if(checkOperator(this.id) === false){
+      input = input + '/';
+    }else{
+      return;
+    };
   break;
   case 'multiply':
-    
+    if(checkOperator(this.id) === true){
+      return
+    }else{
+      input = input + '*';
+    };
   break;
-  case 'multiply':
-    update();
+  case 'equals':
     getTotal();
   break;
-
  }
-  update();
+update();
 });
 
-function getValue(input){
+//if the operater passed in is the same as the previous operator then return
+  // else update the display
+
+function checkOperator(input){
+//if the last element of totalstring is the same as the element passed in
+  if(validationOp.includes(input[input.length-1]) === input){
+    console.log('duplicate operator'); 
+    return true;
+  }else{
+    return false;
+  } 
 
 }
 
 function update(){
-  totalString = input.join('');
-  $('#display').html(totalString);
+  $('#display').html(input);
 }
 
 function getTotal(){
-  totalString = input.join('');
-  $('#display').html(eval(totalString));
+  input = math.eval(input);
 }
