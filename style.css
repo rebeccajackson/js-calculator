@@ -14,7 +14,7 @@ body{
       "seven eight nine clearOne clearAll" 60px
       "four five six add minus" 60px
       "one two three add multiply" 60px
-      "zero period equals equals divide" 60px
+      "zero decimal equals equals divide" 60px
       / 60px 60px 60px 60px 60px;
   grid-gap: 5px;
   padding: 10px;
@@ -92,8 +92,8 @@ body{
   grid-area: zero;
 }
 
-#period{
-  grid-area: period;
+#decimal{
+  grid-area: decimal;
 }
 
 #equals{
