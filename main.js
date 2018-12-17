@@ -3,13 +3,11 @@ Javascript for the functions of the calculator
  
 Created by: Rebecca Jackson as part of Dev Academy Sprint 5 challenges
 
-  User Story #9: In any order, I should be able to add, subtract, multiply and divide a chain of numbers of any length, and when I hit =, the correct result should be shown in the element with the id of display.
-
 User Story #10: When inputting numbers, my calculator should not allow a number to begin with multiple zeros.
 
 User Story #11: When the decimal element is clicked, a . should append to the currently displayed value; two . in one number should not be accepted.
 
-User Story #12: I should be able to perform any operation (+, -, *, /) on numbers containing decimal points.
+  User Story #12: I should be able to perform any operation (+, -, *, /) on numbers containing decimal points.
 
 User Story #13: If 2 or more operators are entered consecutively, the operation performed should be the last operator entered.
 
@@ -20,16 +18,10 @@ User Story #15: My calculator should have several decimal places of precision wh
 document.addEventListener('DOMContentLoaded', runCalculator)
 
 //global variables
-//stores the input from the user
-var input = "";
-//string that stores current inputs
-//var totalString;
-// validation checks
-var validationOp = ['+', '-', '/', '*'];
-var validationDec = ['.'];
-//numbers for validation
-//var nums = [0,1,2,3,4,5,6,7,8,9];
+var input = ""; //stores the input from the user
 
+// validation checks
+var validateOp = ['+', '-', '/', '*'];
 
 function runCalculator(){
   input = "0";
@@ -82,33 +74,16 @@ $('button').on('click', function(){
     input = '0';
   break;
   case 'add':
-  //validate operators
-    if(checkOperator(input) === true){
-      return
-    }else{
-      input = input + '+';
-    };
+    checkOperator('+'); 
   break;
   case 'minus':
-    if(checkOperator(this.id) === true){
-      return
-    }else{
-      input = input + '-';
-    };
+    checkOperator('-');  
   break;
   case 'divide':
-    if(checkOperator(this.id) === false){
-      input = input + '/';
-    }else{
-      return;
-    };
+    checkOperator('/'); 
   break;
   case 'multiply':
-    if(checkOperator(this.id) === true){
-      return
-    }else{
-      input = input + '*';
-    };
+    checkOperator('*'); 
   break;
   case 'equals':
     getTotal();
@@ -117,16 +92,15 @@ $('button').on('click', function(){
 update();
 });
 
-//if the operater passed in is the same as the previous operator then return
-  // else update the display
-
-function checkOperator(input){
+// Validation checks
 //if the last element of totalstring is the same as the element passed in
-  if(validationOp.includes(input[input.length-1]) === input){
+function checkOperator(operator){
+  if(input[input.length-1] === operator || input.length === 0){
     console.log('duplicate operator'); 
-    return true;
-  }else{
     return false;
+  }else{
+    console.log()
+    input = input + operator;
   } 
 
 }
