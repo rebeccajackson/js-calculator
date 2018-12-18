@@ -3,27 +3,16 @@ Javascript for the functions of the calculator
  
 Created by: Rebecca Jackson as part of Dev Academy Sprint 5 challenges
 
-User Story #10: When inputting numbers, my calculator should not allow a number to begin with multiple zeros.
+  User Story #10: When inputting numbers, my calculator should not allow a number to begin with multiple zeros.
+*/
 
-User Story #11: When the decimal element is clicked, a . should append to the currently displayed value; two . in one number should not be accepted.
-
-  User Story #12: I should be able to perform any operation (+, -, *, /) on numbers containing decimal points.
-
-User Story #13: If 2 or more operators are entered consecutively, the operation performed should be the last operator entered.
-
-User Story #14: Pressing an operator immediately following = should start a new calculation that operates on the result of the previous evaluation.
-
-User Story #15: My calculator should have several decimal places of precision when it comes to rounding (note that there is no exact standard, but you should be able to handle calculations like 2 / 7 with reasonable precision to at least 4 decimal places).*/
-
-document.addEventListener('DOMContentLoaded', runCalculator)
+document.addEventListener('DOMContentLoaded', setup)
 
 //global variables
 var input = ""; //stores the input from the user
+var operators = ['+', '-', '/', '*'];
 
-// validation checks
-var validateOp = ['+', '-', '/', '*'];
-
-function runCalculator(){
+function setup(){
   input = "0";
 }
 
@@ -61,11 +50,11 @@ $('button').on('click', function(){
     input = input + '9';
   break;
   case 'zero':
+  //TODO appendZero
     input = input + '0';
   break;
   case 'decimal':
-    //validate decimal
-    input = input + '.';
+    appendDecimal();
   break;
   case 'clearOne':
     input = input.slice(0, -1);
@@ -74,16 +63,16 @@ $('button').on('click', function(){
     input = '0';
   break;
   case 'add':
-    checkOperator('+'); 
+    appendOperator('+'); 
   break;
   case 'minus':
-    checkOperator('-');  
+    appendOperator('-');  
   break;
   case 'divide':
-    checkOperator('/'); 
+    appendOperator('/'); 
   break;
   case 'multiply':
-    checkOperator('*'); 
+    appendOperator('*'); 
   break;
   case 'equals':
     getTotal();
@@ -93,16 +82,22 @@ update();
 });
 
 // Validation checks
-//if the last element of totalstring is the same as the element passed in
-function checkOperator(operator){
-  if(input[input.length-1] === operator || input.length === 0){
+function appendOperator(operator){
+  if(operators.indexOf(input[input.length-1]) >=0 || input.length === 0){
     console.log('duplicate operator'); 
-    return false;
   }else{
-    console.log()
     input = input + operator;
   } 
+}
 
+function appendDecimal(){
+  var numbers = input.split(/[/*+-]/);
+  console.log(numbers);
+  if(numbers[numbers.length-1].includes('.')){
+    console.log('duplicate decimal');
+  } else {
+    input = input + '.'; 
+  }
 }
 
 function update(){
