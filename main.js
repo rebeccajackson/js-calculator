@@ -1,19 +1,16 @@
 /*
-Javascript for the functions of the calculator 
- 
-Created by: Rebecca Jackson as part of Dev Academy Sprint 5 challenges
-
-  User Story #10: When inputting numbers, my calculator should not allow a number to begin with multiple zeros.
+  Javascript Calculator challenge
+  Created by: Rebecca Jackson as part of Dev Academy Sprint 5 challenges
 */
 
-document.addEventListener('DOMContentLoaded', setup)
+document.addEventListener('DOMContentLoaded', setup())
 
 //global variables
 var input = ""; //stores the input from the user
-var operators = ['+', '-', '/', '*'];
+var operators = ['+', '-', '/', '*']; //used to check duplicate operators
 
 function setup(){
-  input = "0";
+  input = '0';
 }
 
 // Event listeners
@@ -50,8 +47,7 @@ $('button').on('click', function(){
     input = input + '9';
   break;
   case 'zero':
-  //TODO appendZero
-    input = input + '0';
+    appendZero();
   break;
   case 'decimal':
     appendDecimal();
@@ -98,6 +94,15 @@ function appendDecimal(){
   } else {
     input = input + '.'; 
   }
+}
+
+function appendZero(){
+  var numbers = input.split(/[/*+-]/);
+  if(numbers[numbers.length-1]==='0'){
+    console.log('Please add a decimal')
+  } else {
+    input = input + '0';
+  } 
 }
 
 function update(){
