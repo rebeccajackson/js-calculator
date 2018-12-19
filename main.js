@@ -3,14 +3,30 @@
   Created by: Rebecca Jackson as part of Dev Academy Sprint 5 challenges
 */
 
-document.addEventListener('DOMContentLoaded', setup())
+document.addEventListener('DOMContentLoaded', setup());
 
 //global variables
-var input = ""; //stores the input from the user
+var input = ''; //stores the input from the user
 var operators = ['+', '-', '/', '*']; //used to check duplicate operators
+var textString = 'Welcome to numbers';
+var textArray = textString.split('');
+var frameLooper;
 
 function setup(){
-  input = '0';
+  input = '';
+  update();
+}
+
+//Welcome message on page loading
+displayWelcome(); 
+
+function displayWelcome(){
+  if(textArray.length>0){
+    document.getElementById('display').innerHTML += textArray.shift(); 
+  } else{
+    clearTimeout(frameLooper);
+  }
+  frameLooper = setTimeout('displayWelcome()', 70);
 }
 
 // Event listeners
