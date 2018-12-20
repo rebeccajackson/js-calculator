@@ -9,153 +9,121 @@ document.addEventListener('DOMContentLoaded', setup())
 var input = ""; //stores the input from the user
 var operators = ['+', '-', '/', '*']; //used to check duplicate operators
 
+
 function setup(){
   input = '0';
 }
 
-//Keyboard event listeners
+//Event listeners
 document.addEventListener("keydown", function(event) {
-  console.log(event.which);
-  // if(event.which == 48){
-  //   input += 0;
-  //   $("#display").text(input);
-  // }
+  processKeys(event.which, event.shiftKey);
+
+});
+
+$('button').on('click', function(){
+  processKeys(this.id);
+});
+
+function processKeys(argument, shift){
   if(input === '0'){
     input = '';
   }
- switch(event.which){
-  case 49:
-    input = input + '1';
-  break;
-  /*case 'two':
-    input = input + '2';
-  break;
-  case 'three':
-    input = input + '3';
-  break;
-  case 'four':
-   input = input + '4';
-  break;
-  case 'five':
-    input = input + '5';
-  break;
-  case 'six':
-    input = input + '6';
-  break;
-  case 'seven':
-    input = input + '7';
-  break;
-  case 'eight':
-    input = input + '8';
-  break;
-  case 'nine':
-    input = input + '9';
-  break;
-  case 'zero':
-    appendZero();
-  break;
-  case 'decimal':
-    appendDecimal();
-  break;
-  case 'clearOne':
-    input = input.slice(0, -1);
-  break;
-  case 'clearAll':
-    input = '0';
-  break;
-  case 'add':
-    appendOperator('+'); 
-  break;
-  case 'minus':
-    appendOperator('-');  
-  break;
-  case 'divide':
-    appendOperator('/'); 
-  break;
-  case 'multiply':
-    appendOperator('*'); 
-  break;
-  case 'equals':
-    getTotal();
-  break;*/
- }
-update();
-});
-function processKeys(argument){
-  if(input === '0'){
-    input = '';
+  console.log(argument);
+  if(shift && argument === 187){
+    argument = 'add'
   }
  switch(argument){
   case 'one':
-  case 48:
-    input = input + '1';
-  break;
- }
-}
-
-// Event listeners
-$('button').on('click', function(){
-  if(input === '0'){
-    input = '';
-  }
- switch(this.id){
-  case 'one':
+  case 49:
+  case 97:
     input = input + '1';
   break;
   case 'two':
+  case 50:
+  case 98:
     input = input + '2';
   break;
   case 'three':
+  case 51:
+  case 99:
     input = input + '3';
   break;
   case 'four':
-   input = input + '4';
+  case 52:
+  case 100:
+    input = input + '4';
   break;
   case 'five':
+  case 53:
+  case 101:
     input = input + '5';
   break;
   case 'six':
+  case 54:
+  case 102:
     input = input + '6';
   break;
   case 'seven':
+  case 55:
+  case 97:
+  case 103:
     input = input + '7';
   break;
   case 'eight':
+  case 56:
+  case 104:
     input = input + '8';
   break;
   case 'nine':
+  case 56:
+  case 105:
     input = input + '9';
   break;
   case 'zero':
+  case 48:
+  case 96:
     appendZero();
   break;
   case 'decimal':
+  case 190:
+  case 110:
     appendDecimal();
   break;
   case 'clearOne':
+  case 8:
     input = input.slice(0, -1);
   break;
   case 'clearAll':
     input = '0';
   break;
   case 'add':
+  case 107:
     appendOperator('+'); 
   break;
   case 'minus':
+  case 109:
     appendOperator('-');  
   break;
   case 'divide':
+  case 111:
     appendOperator('/'); 
   break;
   case 'multiply':
+  case 112:
     appendOperator('*'); 
   break;
   case 'equals':
+  case 187:
+  case 13:
     getTotal();
   break;
- }
-update();
-});
+  case 16:
+  break;
+  default:
+    alert('Please press a valid key'); 
+  }
+  update();
+}
 
 // Validation checks
 function appendOperator(operator){
@@ -190,5 +158,5 @@ function update(){
 }
 
 function getTotal(){
-  input = math.eval(input);
+  input = math.eval(input).toString();
 }
