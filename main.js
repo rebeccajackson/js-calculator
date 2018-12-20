@@ -133,10 +133,10 @@ function processKeys(argument, shift){
   case 13:
     getTotal();
   break;
-  case 16:
-  break;
-  default:
-    alert('Please press a valid key'); 
+  // case 16:
+  // break;
+  // default:
+  //   alert('Please press a valid key'); 
   }
   update();
 }
