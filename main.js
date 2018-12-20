@@ -44,11 +44,11 @@ $('button').on('click', function(){
 });
 
 function processKeys(argument, shift){
-  stopWelcome();
+  stopWelcome(); 
   if(input === '0'){
     input = '';
   }
-  // console.log(argument);
+   console.log(argument);
   if(shift && argument === 187){ // handles shift+add key press
     argument = 'add'
   }
@@ -178,5 +178,9 @@ function update(){
 }
 
 function getTotal(){
-  input = math.eval(input).toString();
+  if(operators.indexOf(input[input.length-1]) >=0 || input.length === 0){
+    console.log('Please add an operator'); 
+  }else{
+   input = math.eval(input).toString();
+  } 
 }
