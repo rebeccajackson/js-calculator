@@ -12,7 +12,6 @@ var textString = 'Welcome to numbers';
 var textArray = textString.split('');
 var frameLooper;
 
-
 function setup(){
   input = '';
   update();
@@ -23,11 +22,15 @@ displayWelcome();
 
 function displayWelcome(){
   if(textArray.length>0){
-    document.getElementById('display').innerHTML += textArray.shift(); 
+    document.getElementById('display').innerHTML += textArray.shift();
+    frameLooper = setTimeout('displayWelcome()', 70); 
   } else{
-    clearTimeout(frameLooper);
+    stopWelcome();
   }
-  frameLooper = setTimeout('displayWelcome()', 70);
+}
+
+function stopWelcome(){
+  clearTimeout(frameLooper);
 }
 
 //Event listeners
@@ -41,11 +44,12 @@ $('button').on('click', function(){
 });
 
 function processKeys(argument, shift){
+  stopWelcome();
   if(input === '0'){
     input = '';
   }
-  console.log(argument);
-  if(shift && argument === 187){
+  // console.log(argument);
+  if(shift && argument === 187){ // handles shift+add key press
     argument = 'add'
   }
  switch(argument){
